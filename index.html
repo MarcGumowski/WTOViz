@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>World Tariff Profiles Visualizations</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+        <link rel="stylesheet" href="css/styles.css" id="styles">
+</head>
+
+<body>
+        <div class="reveal">
+            <div class="slides">
+                <section id = title>
+                    <h1>World Tariff Profiles 2017</h1>
+                    <h2>Visualizations</h2>
+                </section>
+                
+                <section id="slide1">
+                    <h3>Trade Flow Chart, 2015</h3>
+                    <div class ="graph" id="chord"></div> 
+                </section>
+                
+                <section id="slide2">
+                    <h3>Top 20 Leading Importers of Products, 2015</h3>
+                    <div class ="graph" id="sankey"></div> 
+                </section>
+                
+                <section id="slide3">
+                  <section id="slide3A">
+                    <h3>Imports and Applied Tariffs by Product Groups</h3>
+                    <div class=buttons>
+                      <button class="myButton" type="button" id="combine2">All</button>
+                      <button class="myButton" type="button" id="type2">AG / NAMA</button>
+                      <button class="myButton" type="button" id="orderImports2">By Imports</button>
+                      <button class="myButton" type="button" id="orderTariffs2">By Tariffs</button>
+                      <select class='myButton' id='optsBubble2'> <option value = 'World'>World</option> <option value = 'Developed'>Developed</option> <option value = 'Developing'>Developing</option> <option value = 'LDC'>LDC</option> <option value = 'Non WTO Member'>Non WTO Member</option> <option value = 'Afghanistan'>Afghanistan</option> <option value = 'Albania'>Albania</option> <option value = 'Algeria'>Algeria</option> <option value = 'Angola'>Angola</option> <option value = 'Antigua and Barbuda'>Antigua and Barbuda</option> <option value = 'Argentina'>Argentina</option> <option value = 'Armenia'>Armenia</option> <option value = 'Australia'>Australia</option> <option value = 'Azerbaijan'>Azerbaijan</option> <option value = 'Bahamas'>Bahamas</option> <option value = 'Bahrain, Kingdom of'>Bahrain, Kingdom of</option> <option value = 'Bangladesh'>Bangladesh</option> <option value = 'Barbados'>Barbados</option> <option value = 'Belarus'>Belarus</option> <option value = 'Belize'>Belize</option> <option value = 'Benin'>Benin</option> <option value = 'Bolivia, Plurinational State of'>Bolivia, Plurinational State of</option> <option value = 'Bosnia and Herzegovina'>Bosnia and Herzegovina</option> <option value = 'Botswana'>Botswana</option> <option value = 'Brazil'>Brazil</option> <option value = 'Brunei Darussalam'>Brunei Darussalam</option> <option value = 'Burkina Faso'>Burkina Faso</option> <option value = 'Burundi'>Burundi</option> <option value = 'Cabo Verde'>Cabo Verde</option> <option value = 'Cambodia'>Cambodia</option> <option value = 'Cameroon'>Cameroon</option> <option value = 'Canada'>Canada</option> <option value = 'Central African Republic'>Central African Republic</option> <option value = 'Chad'>Chad</option> <option value = 'Chile'>Chile</option> <option value = 'China'>China</option> <option value = 'Chinese Taipei'>Chinese Taipei</option> <option value = 'Colombia'>Colombia</option> <option value = 'Congo'>Congo</option> <option value = 'Costa Rica'>Costa Rica</option> <option value = 'Cuba'>Cuba</option> <option value = 'Ivory Coast'>Ivory Coast</option> <option value = 'Djibouti'>Djibouti</option> <option value = 'Dominica'>Dominica</option> <option value = 'Dominican Republic'>Dominican Republic</option> <option value = 'Ecuador'>Ecuador</option> <option value = 'Egypt'>Egypt</option> <option value = 'El Salvador'>El Salvador</option> <option value = 'Ethiopia'>Ethiopia</option> <option value = 'European Union'>European Union</option> <option value = 'Fiji'>Fiji</option> <option value = 'Gabon'>Gabon</option> <option value = 'Georgia'>Georgia</option> <option value = 'Ghana'>Ghana</option> <option value = 'Grenada'>Grenada</option> <option value = 'Guatemala'>Guatemala</option> <option value = 'Guinea'>Guinea</option> <option value = 'Guinea-Bissau'>Guinea-Bissau</option> <option value = 'Guyana'>Guyana</option> <option value = 'Haiti'>Haiti</option> <option value = 'Honduras'>Honduras</option> <option value = 'Hong Kong, China'>Hong Kong, China</option> <option value = 'Iceland'>Iceland</option> <option value = 'India'>India</option> <option value = 'Indonesia'>Indonesia</option> <option value = 'Iran'>Iran</option> <option value = 'Israel'>Israel</option> <option value = 'Jamaica'>Jamaica</option> <option value = 'Japan'>Japan</option> <option value = 'Jordan'>Jordan</option> <option value = 'Kazakhstan'>Kazakhstan</option> <option value = 'Kenya'>Kenya</option> <option value = 'Korea, Republic of'>Korea, Republic of</option> <option value = 'Kuwait, the State of'>Kuwait, the State of</option> <option value = 'Kyrgyz Republic'>Kyrgyz Republic</option> <option value = 'Lebanese Republic'>Lebanese Republic</option> <option value = 'Lesotho'>Lesotho</option> <option value = 'Macao, China'>Macao, China</option> <option value = 'Madagascar'>Madagascar</option> <option value = 'Malawi'>Malawi</option> <option value = 'Malaysia'>Malaysia</option> <option value = 'Maldives'>Maldives</option> <option value = 'Mali'>Mali</option> <option value = 'Mauritania'>Mauritania</option> <option value = 'Mauritius'>Mauritius</option> <option value = 'Mexico'>Mexico</option> <option value = 'Moldova, Republic of'>Moldova, Republic of</option> <option value = 'Mongolia'>Mongolia</option> <option value = 'Montenegro'>Montenegro</option> <option value = 'Morocco'>Morocco</option> <option value = 'Mozambique'>Mozambique</option> <option value = 'Myanmar'>Myanmar</option> <option value = 'Namibia'>Namibia</option> <option value = 'Nepal'>Nepal</option> <option value = 'New Zealand'>New Zealand</option> <option value = 'Nicaragua'>Nicaragua</option> <option value = 'Niger'>Niger</option> <option value = 'Nigeria'>Nigeria</option> <option value = 'Norway'>Norway</option> <option value = 'Oman'>Oman</option> <option value = 'Pakistan'>Pakistan</option> <option value = 'Palau'>Palau</option> <option value = 'Panama'>Panama</option> <option value = 'Papua New Guinea'>Papua New Guinea</option> <option value = 'Paraguay'>Paraguay</option> <option value = 'Peru'>Peru</option> <option value = 'Philippines'>Philippines</option> <option value = 'Qatar'>Qatar</option> <option value = 'Russian Federation'>Russian Federation</option> <option value = 'Rwanda'>Rwanda</option> <option value = 'Saint Kitts and Nevis'>Saint Kitts and Nevis</option> <option value = 'Saint Lucia'>Saint Lucia</option> <option value = 'Saint Vincent and the Grenadines'>Saint Vincent and the Grenadines</option> <option value = 'Samoa'>Samoa</option> <option value = 'Sao Tome and Principe'>Sao Tome and Principe</option> <option value = 'Saudi Arabia, Kingdom of'>Saudi Arabia, Kingdom of</option> <option value = 'Senegal'>Senegal</option> <option value = 'Serbia'>Serbia</option> <option value = 'Seychelles'>Seychelles</option> <option value = 'Singapore'>Singapore</option> <option value = 'Solomon Islands'>Solomon Islands</option> <option value = 'South Africa'>South Africa</option> <option value = 'Sri Lanka'>Sri Lanka</option> <option value = 'Sudan'>Sudan</option> <option value = 'Swaziland'>Swaziland</option> <option value = 'Switzerland'>Switzerland</option> <option value = 'Tanzania'>Tanzania</option> <option value = 'Thailand'>Thailand</option> <option value = 'The Gambia'>The Gambia</option> <option value = 'The former Yugoslav Republic of Macedonia'>The former Yugoslav Republic of Macedonia</option> <option value = 'Timor-Leste'>Timor-Leste</option> <option value = 'Togo'>Togo</option> <option value = 'Tonga'>Tonga</option> <option value = 'Trinidad and Tobago'>Trinidad and Tobago</option> <option value = 'Tunisia'>Tunisia</option> <option value = 'Turkey'>Turkey</option> <option value = 'Uganda'>Uganda</option> <option value = 'Ukraine'>Ukraine</option> <option value = 'United Arab Emirates'>United Arab Emirates</option> <option value = 'United States of America'>United States of America</option> <option value = 'Uruguay'>Uruguay</option> <option value = 'Vanuatu'>Vanuatu</option> <option value = 'Venezuela, Bolivarian Republic of'>Venezuela, Bolivarian Republic of</option> <option value = 'Viet Nam'>Viet Nam</option> <option value = 'Yemen'>Yemen</option> <option value = 'Zambia'>Zambia</option> <option value = 'Zimbabwe'>Zimbabwe</option> </select></div>
+                    <div class ="graph" id="bubble2"></div> 
+                  </section>
+                  <section id="slide3B">
+                    <h3>Imports and Applied Tariffs by Country</h3>
+                    <div class=buttons>
+                      <button class="myButton" type="button" id="combine">World</button>
+                      <button class="myButton" type="button" id="region">By Region</button>
+                      <button class="myButton" type="button" id="orderImports">By Imports</button>
+                      <button class="myButton" type="button" id="orderTariffs">By Tariffs</button>
+                      <select class='myButton' id='optsBubble'> <option value = '00 - Total'>00 - Total</option> <option value = '01 - Animal products'>01 - Animal products</option> <option value = '02 - Dairy products'>02 - Dairy products</option> <option value = '03 - Fruits, vegetables, plants'>03 - Fruits, vegetables, plants</option> <option value = '04 - Coffee, tea'>04 - Coffee, tea</option> <option value = '05 - Cereals and preparations'>05 - Cereals and preparations</option> <option value = '06 - Oilseeds, fats and oils'>06 - Oilseeds, fats and oils</option> <option value = '07 - Sugars and confectionery'>07 - Sugars and confectionery</option> <option value = '08 - Beverages and tobacco'>08 - Beverages and tobacco</option> <option value = '09 - Cotton'>09 - Cotton</option> <option value = '10 - Other agricultural products'>10 - Other agricultural products</option> <option value = '11 - Fish and fish products'>11 - Fish and fish products</option> <option value = '12 - Minerals and metals'>12 - Minerals and metals</option> <option value = '13 - Petroleum'>13 - Petroleum</option> <option value = '14 - Chemicals'>14 - Chemicals</option> <option value = '15 - Wood, paper, etc'>15 - Wood, paper, etc</option> <option value = '16 - Textiles'>16 - Textiles</option> <option value = '17 - Clothing'>17 - Clothing</option> <option value = '18 - Leather, footwear, etc'>18 - Leather, footwear, etc</option> <option value = '19 - Non-electrical machinery'>19 - Non-electrical machinery</option> <option value = '20 - Electrical machinery'>20 - Electrical machinery</option> <option value = '21 - Transport equipment'>21 - Transport equipment</option> <option value = '22 - Manufactures n.e.s.'>22 - Manufactures n.e.s.</option> </select>
+                      </div>
+                    <div class ="graph" id="bubble"></div>                       
+                  </section>
+                </section>
+                
+                <section id="slide4">
+                    <h3>Range of Tariffs Applied by WTO Members</h3>
+                    <div class ="graph" id="timeSeriesBar"></div> 
+                </section>
+                
+                <section id="slide5">
+                    <h3>Other Agricultural Commitments of Members</h3>
+                    <div class ="graph" id="safeguard"></div> 
+                </section>    
+                
+                <section id="slide6">
+                    <h3>Trend of world imports and applied MFN tariffs</h3>
+                    <div class ="graph" id="tilc"></div> 
+                </section> 
+                
+            </div>
+        </div>
+        
+        <script src="js/reveal.js"></script>
+        <script>
+            Reveal.initialize();
+        </script>
+
+        <script src="js/d3.min.js"></script>
+        <script src="js/d3-sankey.js"></script>
+        <script src="data/data.js"></script>
+        <script src="js/chord.js"></script>
+        <script src="js/sankey.js"></script>
+        <script src="js/bubble2.js"></script>
+        <script src="js/bubble.js"></script>
+        <script src="js/timeSeriesBar.js"></script>
+        <script src="js/safeguard.js"></script>
+        <script src="js/tilc.js"></script>
+</body>
+</html>                
+                
