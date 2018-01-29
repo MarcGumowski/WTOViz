@@ -20,8 +20,8 @@ var rescale = 0.9;
 var width = 960 * rescale - margin.left - margin.right;
 var height = 640 * rescale - margin.top - margin.bottom;
 
-var formatNumber = d3.format(".1f"),
-    format = function(d) { return formatNumber(d); },
+var formatNumberTilc = d3.format(".1f"),
+    formatTilc = function(d) { return formatNumberTilc(d); },
     bisectDate = d3.bisector(function(d) { return d.year; }).left;
 
 var divTilc = d3.select('#tilc').append('div')
@@ -37,7 +37,7 @@ var svgTilc = d3.select("#tilc").append("svg")
 var gTilc = svgTilc.append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
     
-var back = svgTilc.append("rect")
+var backTilc = svgTilc.append("rect")
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr("height", height)
     .attr("width", width)
@@ -98,7 +98,7 @@ tariffsGradient.selectAll("stop")
     .attr("stop-color", function(d) { return d.color; });
     
 // Or simple color
-color = ["#D0794A", "#1d91c0"];
+colorTilc = ["#D0794A", "#1d91c0"];
     
 ///////////////////////////////////////////////
 // Data ///////////////////////////////////////
@@ -117,11 +117,11 @@ dataTilc.forEach(function(d) {
 // Scales /////////////////////////////////////
 ///////////////////////////////////////////////
 
-var x = d3.scaleTime()
+var xTilc = d3.scaleTime()
     .domain(d3.extent(dataTilc, function(d) { return d.year; }))
     .rangeRound([0, width]);
     
-var y = d3.scaleLinear()
+var yTilc = d3.scaleLinear()
     //.domain([0, d3.max(dataTilc, function(d) { return Math.max(d.importsindex, d.tariffsindex); })])
     .domain([0, 350])
     .range([height, 0]);  
@@ -131,13 +131,13 @@ var y = d3.scaleLinear()
 ///////////////////////////////////////////////
 
 // Set up axes
-var xAxis = d3.axisBottom(x)
+var xAxisTilc = d3.axisBottom(xTilc)
   .ticks(d3.timeYear)
   .tickFormat(d3.timeFormat("%Y"))
   .tickSize(0)
   .tickPadding(0.5);
   
-var yAxis = d3.axisRight(y)
+var yAxisTilc = d3.axisRight(yTilc)
   .tickSize(width)
   .tickFormat(function(d){return d});  
 
@@ -145,12 +145,12 @@ var yAxis = d3.axisRight(y)
 gTilc.append('g')
   .attr('class', 'axisX')
   .attr('transform', 'translate(' + 0 + ',' + height + ')')
-  .call(customXAxis)
+  .call(customxAxisTilc)
   .style('opacity', 0); 
   
 gTilc.append('g')
   .attr('class', 'axisY')
-  .call(customYAxis)
+  .call(customyAxisTilc)
   .selectAll('text')
   .style('text-anchor', 'middle');
   
@@ -159,8 +159,8 @@ gTilc.selectAll('.axisX').transition("starting").duration(1000)
     .style('opacity', 1);  
 
 // Custom functions
-function customXAxis(g) {
-  gTilc.call(xAxis);
+function customxAxisTilc(gTilc) {
+  gTilc.call(xAxisTilc);
   gTilc.select(".domain").remove();
   gTilc.selectAll(".tick text") 
     .attr("id", function(d) { return "year" + d.year; })     
@@ -171,9 +171,9 @@ function customXAxis(g) {
     .style("fill", "#666666");
 } 
 
-function customYAxis(g) {
+function customyAxisTilc(gTilc) {
   var s = gTilc.selection ? gTilc.selection() : gTilc;
-  gTilc.call(yAxis);
+  gTilc.call(yAxisTilc);
   s.select(".domain").remove();
   s.selectAll(".tick line").attr("stroke", "#666666");  
   s.selectAll(".tick line").filter(Number).attr("stroke-dasharray", "2,2")
@@ -188,12 +188,12 @@ function customYAxis(g) {
 
 // Define lines imports and tariffs
 var importsLine = d3.line()
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.importsindex); });
+    .x(function(d) { return xTilc(d.year); })
+    .y(function(d) { return yTilc(d.importsindex); });
     
 var tariffsLine = d3.line()
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.tariffsindex); });
+    .x(function(d) { return xTilc(d.year); })
+    .y(function(d) { return yTilc(d.tariffsindex); });
     
 // Draw lines    
 var importsPath = gTilc.append("path")
@@ -202,7 +202,7 @@ var importsPath = gTilc.append("path")
         .attr("id", "line")
         .attr("fill", "none")
         //.attr("stroke", "url(#importsGradient)")
-        .attr("stroke", color[0])        
+        .attr("stroke", colorTilc[0])        
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 4)
@@ -214,7 +214,7 @@ var tariffsPath = gTilc.append("path")
         .attr("id", "line")
         .attr("fill", "none")
         //.attr("stroke", "url(#tariffsGradient)")
-        .attr("stroke", color[1])          
+        .attr("stroke", colorTilc[1])          
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 4)
@@ -239,7 +239,7 @@ tariffsPath
     
     
 // On click transition
-back
+backTilc
   .on("click", cycled);
    
 var swap = 0; 
@@ -270,24 +270,24 @@ function drawLine(){
 // Legend /////////////////////////////////////
 ///////////////////////////////////////////////
 
-var legendRectText = ["Merchandise trade index", "Average MFN tariff index"];
+var legendTilcRectText = ["Merchandise trade index", "Average MFN tariff index"];
   
-var legend = svgTilc.append('g')
+var legendTilc = svgTilc.append('g')
     .attr('class', 'legend')
     .selectAll('g')
-    .data(color)
+    .data(colorTilc)
     .enter().append('g')
     .attr('transform', function(d, i) { return 'translate(' + i * 220 + ', 0)'; });
 
-legend.append('rect')
+legendTilc.append('rect')
     .attr('y', height + margin.top + margin.bottom / 2)
     .attr('x', (width + margin.left + margin.right) / 2 - 207)
     .attr('width', 60)
     .attr('height', 10)
-    .style('fill', function(d, i) { return color[i]; });
+    .style('fill', function(d, i) { return colorTilc[i]; });
   
-legend.append('text')
-    .data(legendRectText)
+legendTilc.append('text')
+    .data(legendTilcRectText)
     .attr('y', height + margin.top + margin.bottom / 2)
     .attr('x', (width + margin.left + margin.right) / 2 - 145)
     .attr('dy', '.66em')
@@ -297,33 +297,33 @@ legend.append('text')
     .style('font-family', 'calibri')
     .text(function(d) { return d; });
     
-legend.on("click", function(d) { console.log(d); });
+legendTilc.on("click", function(d) { console.log(d); });
 
 ///////////////////////////////////////////////
 // Tooltip ////////////////////////////////////
 ///////////////////////////////////////////////
 
 // Define Line and Circle
-var backLine = gTilc.append('line'),
-    backCircleImports = gTilc.append('circle'),
-    backCircleTariffs = gTilc.append('circle');
+var backTilcLine = gTilc.append('line'),
+    backTilcCircleImports = gTilc.append('circle'),
+    backTilcCircleTariffs = gTilc.append('circle');
 
 // Tooltip appears on background
-back
+backTilc
   .on('mousemove', drawTooltip)
   .on('mouseout', removeTooltip);
 
 // Function  
 function removeTooltip() {
   divTilc.transition().duration(500).style('opacity', 0);
-  backLine.attr('opacity', 0);
-  backCircleImports.attr('opacity', 0);
-  backCircleTariffs.attr('opacity', 0);
+  backTilcLine.attr('opacity', 0);
+  backTilcCircleImports.attr('opacity', 0);
+  backTilcCircleTariffs.attr('opacity', 0);
 }
 
 function drawTooltip() {
   
-  var x0 = x.invert(d3.mouse(this)[0]),
+  var x0 = xTilc.invert(d3.mouse(this)[0]),
       i = bisectDate(dataTilc, x0, 1),
       d0 = dataTilc[i - 1],
       d1 = dataTilc[i],
@@ -334,42 +334,42 @@ function drawTooltip() {
     .style('opacity', 1);
   divTilc.html('<b><font size = "3">' + d.year.getFullYear() + '</font></b>' + 
            '<br/>' +
-           'The ' + '<b><font color="' + color[0] +'">' + 'Merchandise trade index' + '</font></b>' +
-           ' is equal to <b>' + format(d.importsindex) + '</b>% of the 1996 global trade in goods.' + '</br>' +
-           ' This represents US$<b>' + format(d.imports) + '</b> trillion.' +
+           'The ' + '<b><font color="' + colorTilc[0] +'">' + 'Merchandise trade index' + '</font></b>' +
+           ' is equal to <b>' + formatTilc(d.importsindex) + '</b>% of the 1996 global trade in goods.' + '</br>' +
+           ' This represents US$<b>' + formatTilc(d.imports) + '</b> trillion.' +
            '<br/>' +
-           'The ' + '<b><font color="' + color[1] +'">' + 'Average MFN tariff index' + '</font></b>' +
-           ' indicates a value of <b>' + format(d.tariffsindex) + '</b>% relative to 1996.' + '</br>' +
-           'For ' + d.year.getFullYear() + ', this represents an average MFN tariff of <b>' + format(d.tariffs) + '</b>%.')
+           'The ' + '<b><font color="' + colorTilc[1] +'">' + 'Average MFN tariff index' + '</font></b>' +
+           ' indicates a value of <b>' + formatTilc(d.tariffsindex) + '</b>% relative to 1996.' + '</br>' +
+           'For ' + d.year.getFullYear() + ', this represents an average MFN tariff of <b>' + formatTilc(d.tariffs) + '</b>%.')
         .style('left', (d3.event.pageX + 25)+ 'px')    
         .style('top', (d3.event.pageY - 35) + 'px');
 
-  backLine
+  backTilcLine
     .attr('opacity', 1)
     .attr('stroke', '#666666')
     .attr('stroke-width', 2)
     .attr("stroke-dasharray", "2,2")
-    .attr('x1', x(d.year))
-    .attr('x2', x(d.year))
+    .attr('x1', xTilc(d.year))
+    .attr('x2', xTilc(d.year))
     .attr('y1', 0)
     .attr('y2', height);
     
-  backCircleImports
+  backTilcCircleImports
     .attr('opacity', 1)
     .attr('r', 9)
-    .attr('cx', x(d.year))
-    .attr('cy', y(d.importsindex))
+    .attr('cx', xTilc(d.year))
+    .attr('cy', yTilc(d.importsindex))
     .style('fill', 'none')
-    .style('stroke', color[0])
+    .style('stroke', colorTilc[0])
     .style('stroke-width', 2);
     
-  backCircleTariffs
+  backTilcCircleTariffs
     .attr('opacity', 1)
     .attr('r', 9)
-    .attr('cx', x(d.year))
-    .attr('cy', y(d.tariffsindex))
+    .attr('cx', xTilc(d.year))
+    .attr('cy', yTilc(d.tariffsindex))
     .style('fill', 'none')
-    .style('stroke', color[1])
+    .style('stroke', colorTilc[1])
     .style('stroke-width', 2);    
 }  
       
