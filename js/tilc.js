@@ -24,20 +24,20 @@ var formatNumber = d3.format(".1f"),
     format = function(d) { return formatNumber(d); },
     bisectDate = d3.bisector(function(d) { return d.year; }).left;
 
-var div = d3.select('#tilc').append('div')
+var divTilc = d3.select('#tilc').append('div')
     .attr('class', 'tooltip')
     .attr('id', 'tooltip')
     .style('opacity', 0);
 
-var svg = d3.select("#tilc").append("svg")
+var svgTilc = d3.select("#tilc").append("svg")
     .attr('id', 'tilcSvg')
     .attr("height", height + margin.top + margin.bottom)
     .attr("width", width + margin.left + margin.right);
 
-var g = svg.append('g')
+var gTilc = svgTilc.append('g')
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
     
-var back = svg.append("rect")
+var back = svgTilc.append("rect")
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     .attr("height", height)
     .attr("width", width)
@@ -49,7 +49,7 @@ var back = svg.append("rect")
 // Gradient ///////////////////////////////////
 ///////////////////////////////////////////////  
 
-var defs = svg.append("defs");
+var defs = svgTilc.append("defs");
 
 // Imports
 var importsGradient = defs.append("linearGradient")
@@ -142,27 +142,27 @@ var yAxis = d3.axisRight(y)
   .tickFormat(function(d){return d});  
 
 // Draw axes
-g.append('g')
+gTilc.append('g')
   .attr('class', 'axisX')
   .attr('transform', 'translate(' + 0 + ',' + height + ')')
   .call(customXAxis)
   .style('opacity', 0); 
   
-g.append('g')
+gTilc.append('g')
   .attr('class', 'axisY')
   .call(customYAxis)
   .selectAll('text')
   .style('text-anchor', 'middle');
   
 // Starting 
-g.selectAll('.axisX').transition("starting").duration(1000)
+gTilc.selectAll('.axisX').transition("starting").duration(1000)
     .style('opacity', 1);  
 
 // Custom functions
 function customXAxis(g) {
-  g.call(xAxis);
-  g.select(".domain").remove();
-  g.selectAll(".tick text") 
+  gTilc.call(xAxis);
+  gTilc.select(".domain").remove();
+  gTilc.selectAll(".tick text") 
     .attr("id", function(d) { return "year" + d.year; })     
     .attr("dy", "1.17em")
     .style('text-anchor', 'middle')
@@ -172,14 +172,14 @@ function customXAxis(g) {
 } 
 
 function customYAxis(g) {
-  var s = g.selection ? g.selection() : g;
-  g.call(yAxis);
+  var s = gTilc.selection ? gTilc.selection() : gTilc;
+  gTilc.call(yAxis);
   s.select(".domain").remove();
   s.selectAll(".tick line").attr("stroke", "#666666");  
   s.selectAll(".tick line").filter(Number).attr("stroke-dasharray", "2,2")
     .attr("stroke-width", 0.5);
   s.selectAll(".tick text").attr("x", -20).attr("dy", 4).style("fill", "#666666");
-  if (s !== g) g.selectAll(".tick text").attrTween("x", null).attrTween("dy", null);
+  if (s !== gTilc) gTilc.selectAll(".tick text").attrTween("x", null).attrTween("dy", null);
 }
 
 ///////////////////////////////////////////////
@@ -196,7 +196,7 @@ var tariffsLine = d3.line()
     .y(function(d) { return y(d.tariffsindex); });
     
 // Draw lines    
-var importsPath = g.append("path")
+var importsPath = gTilc.append("path")
         .datum(dataTilc)
         .attr("class", "line")
         .attr("id", "line")
@@ -208,7 +208,7 @@ var importsPath = g.append("path")
         .attr("stroke-width", 4)
         .attr("d", importsLine);
         
-var tariffsPath = g.append("path")
+var tariffsPath = gTilc.append("path")
         .datum(dataTilc)
         .attr("class", "line")
         .attr("id", "line")
@@ -272,7 +272,7 @@ function drawLine(){
 
 var legendRectText = ["Merchandise trade index", "Average MFN tariff index"];
   
-var legend = svg.append('g')
+var legend = svgTilc.append('g')
     .attr('class', 'legend')
     .selectAll('g')
     .data(color)
@@ -304,9 +304,9 @@ legend.on("click", function(d) { console.log(d); });
 ///////////////////////////////////////////////
 
 // Define Line and Circle
-var backLine = g.append('line'),
-    backCircleImports = g.append('circle'),
-    backCircleTariffs = g.append('circle');
+var backLine = gTilc.append('line'),
+    backCircleImports = gTilc.append('circle'),
+    backCircleTariffs = gTilc.append('circle');
 
 // Tooltip appears on background
 back
@@ -315,7 +315,7 @@ back
 
 // Function  
 function removeTooltip() {
-  div.transition().duration(500).style('opacity', 0);
+  divTilc.transition().duration(500).style('opacity', 0);
   backLine.attr('opacity', 0);
   backCircleImports.attr('opacity', 0);
   backCircleTariffs.attr('opacity', 0);
@@ -329,10 +329,10 @@ function drawTooltip() {
       d1 = dataTilc[i],
       d = x0 - d0.year > d1.year - x0 ? d1 : d0;
       
-  div.transition()
+  divTilc.transition()
     .duration(0)      
     .style('opacity', 1);
-  div.html('<b><font size = "3">' + d.year.getFullYear() + '</font></b>' + 
+  divTilc.html('<b><font size = "3">' + d.year.getFullYear() + '</font></b>' + 
            '<br/>' +
            'The ' + '<b><font color="' + color[0] +'">' + 'Merchandise trade index' + '</font></b>' +
            ' is equal to <b>' + format(d.importsindex) + '</b>% of the 1996 global trade in goods.' + '</br>' +
